@@ -5,7 +5,9 @@ require_relative "platform"
 require_relative "fish"
 
 class GameWindow < Gosu::Window
-
+	
+	GRAVITY = 0.25
+	
 	def initialize
 		super 640, 1000
 		self.caption = "Penguin Adventure"
@@ -13,8 +15,9 @@ class GameWindow < Gosu::Window
 		@background_image = Gosu::Image.new("media/background.jpg")
 		
 		@player = Player.new
-		@player.warp(width/2.0, height)
+		@player.warp(width/2.0, height - 50)
 
+		@bottom_platform = Platform.new(0, 950, 1.25, 0.25)
 		@platforms = []
 		@fish = []
 	end
@@ -26,17 +29,32 @@ class GameWindow < Gosu::Window
 		if @fish.size < 11
 			@fish.push(Fish.new)
 		end
+
+		@player.jump if Gosu::button_down? Gosu::KbUp
+
+		@player.move
+		gravity
 	end
 
 	def draw
 		@background_image.draw(0,0,ZOrder::BACKGROUND)
 		@player.draw
+		@bottom_platform.draw
+
 		@platforms.each { |platform| platform.draw }
 		@fish.each { |fish| fish.draw }
 	end
 
 	def button_down id
 		close if id == Gosu::KbEscape
+	end
+
+	def gravity
+		if @player.y < 950
+			@player.vel_y -= GRAVITY
+		else
+			@player.vel_y = 0
+		end
 	end
 
 end

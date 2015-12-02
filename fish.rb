@@ -5,7 +5,7 @@ class Fish
 
 	def initialize
 		@image = Gosu::Image.new("media/fish.bmp")
-		@x = rand*640
+		@x = rand*560 + 40
 		@y = rand*600
 		
 		@color = Gosu::Color.new(0xff_000000)
