@@ -1,3 +1,6 @@
 class ZOrder
 	BACKGROUND = 0
+	PLATFORMS = 1
+	PLAYER = 2
+	FISH = 3
 end
