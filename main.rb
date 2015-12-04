@@ -30,7 +30,11 @@ class GameWindow < Gosu::Window
 			@fish.push(Fish.new)
 		end
 
+		@player.eat(@fish)
+
 		@player.jump if Gosu::button_down? Gosu::KbUp
+		@player.left if Gosu::button_down? Gosu::KbLeft
+		@player.right if Gosu::button_down? Gosu::KbRight
 
 		@player.move
 		gravity

@@ -1,7 +1,10 @@
 require "gosu"
 require_relative "z_order"
+require_relative "collision"
 
 class Fish
+
+	attr_accessor :hit_box
 
 	def initialize
 		@image = Gosu::Image.new("media/fish.bmp")
@@ -12,6 +15,8 @@ class Fish
 		@color.red = rand(256 - 40) + 40
 		@color.green = rand(256 - 40) + 40
 		@color.blue = rand(256 - 40) + 40
+
+		@hit_box = Collision.new(@x, @y)
 	end
 
 	def draw
