@@ -13,12 +13,13 @@ class GameWindow < Gosu::Window
 		self.caption = "Penguin Adventure"
 
 		@background_image = Gosu::Image.new("media/background.jpg")
-		
+		@font = Gosu::Font.new(50)
+
 		@player = Player.new
 		@player.warp(width/2.0, height - 50)
 
-		@bottom_platform = Platform.new(0, 950, 1.25, 0.25)
 		@platforms = []
+		@platforms.push(Platform.new(0, 950, 1.25, 0.25))
 		@fish = []
 	end
 
@@ -32,7 +33,7 @@ class GameWindow < Gosu::Window
 
 		@player.eat(@fish)
 
-		@player.jump if Gosu::button_down? Gosu::KbUp
+		@player.jump
 		@player.left if Gosu::button_down? Gosu::KbLeft
 		@player.right if Gosu::button_down? Gosu::KbRight
 
@@ -42,8 +43,9 @@ class GameWindow < Gosu::Window
 
 	def draw
 		@background_image.draw(0,0,ZOrder::BACKGROUND)
+		@font.draw(@player.score, self.width-75, self.height-75, ZOrder::UI, 1.0, 1.0, 0xff_000000)
+
 		@player.draw
-		@bottom_platform.draw
 
 		@platforms.each { |platform| platform.draw }
 		@fish.each { |fish| fish.draw }
@@ -54,11 +56,7 @@ class GameWindow < Gosu::Window
 	end
 
 	def gravity
-		if @player.y < 950
-			@player.vel_y -= GRAVITY
-		else
-			@player.vel_y = 0
-		end
+		@player.standing?(@platforms) ? @player.vel_y = 0 : @player.vel_y -= GRAVITY
 	end
 
 end
