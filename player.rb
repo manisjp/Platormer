@@ -4,6 +4,7 @@ require_relative "collision"
 
 class Player
 
+	JUMP_POWER = 25
 	ACCELERATION = 1
 	TURN_ANGLE = 5
 
@@ -27,7 +28,7 @@ class Player
 	end
 
 	def jump
-		@vel_y += ACCELERATION
+		@vel_y += JUMP_POWER
 	end
 
 	def left

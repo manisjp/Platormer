@@ -6,7 +6,7 @@ require_relative "fish"
 
 class GameWindow < Gosu::Window
 	
-	GRAVITY = 0.25
+	GRAVITY = 0.5
 	
 	def initialize
 		super 640, 1000
@@ -33,7 +33,7 @@ class GameWindow < Gosu::Window
 
 		@player.eat(@fish)
 
-		@player.jump if Gosu::button_down? Gosu::KbUp
+		@player.jump if @player.standing?(@platforms)
 		@player.left if Gosu::button_down? Gosu::KbLeft
 		@player.right if Gosu::button_down? Gosu::KbRight
 
