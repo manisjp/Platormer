@@ -6,16 +6,19 @@ class Fish
 
 	attr_accessor :hit_box
 
+	# create fully randomized fish
 	def initialize
 		@image = Gosu::Image.new("media/fish.bmp")
-		@x = rand*560 + 40
-		@y = rand*600
+		# random position
+		@x, @y = rand*560 + 40, rand*600
 		
+		# random color not too dark
 		@color = Gosu::Color.new(0xff_000000)
 		@color.red = rand(256 - 40) + 40
 		@color.green = rand(256 - 40) + 40
 		@color.blue = rand(256 - 40) + 40
 
+		# create hit box in middle of fish
 		@hit_box = Collision.new(@x, @y)
 	end
 

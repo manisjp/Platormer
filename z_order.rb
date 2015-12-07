@@ -1,3 +1,4 @@
+# z_orders for every element
 class ZOrder
 	BACKGROUND = 0
 	PLATFORMS = 1

@@ -8,17 +8,20 @@ class Player
 	ACCELERATION = 1
 	TURN_ANGLE = 5
 
-	attr_accessor :x, :y, :vel_x, :vel_y, :feet_box, :mouth_box, :image, :score
+	attr_accessor :vel_y, :score
 
+	# create player
 	def initialize
-		@x = @y = @vel_x = @vel_y = @angle = 0
-		@score = 0
+		@x = @y = @vel_x = @vel_y = @angle = @score = 0
+		# image used for player
 		@image = Gosu::Image.new("media/penguin.bmp")
 		
+		# create seperate hit boxes at feet and mouth of player
 		@feet_box = Collision.new(@x, @y + @image.height/2)
 		@mouth_box = Collision.new(@x, @y - @image.height/2)
 	end
 
+	# used to place player at bottom middle
 	def warp x, y
 		@x, @y = x, y	
 	end
@@ -27,20 +30,24 @@ class Player
 		@image.draw_rot(@x,@y,ZOrder::PLAYER, @angle, 0.5, 1, 0.5, 0.5)
 	end
 
+	# accelerate player upwards
 	def jump
 		@vel_y += JUMP_POWER
 	end
 
+	# accelerate player left
 	def left
 		@vel_x -= ACCELERATION
 		@angle -= TURN_ANGLE if @angle > -15
 	end
 
+	# accelerate player right
 	def right
 		@vel_x += ACCELERATION
 		@angle += TURN_ANGLE if @angle < 15
 	end
 
+	# move player and hit boxes and decelerate player if no buttons pressed
 	def move
 		@x += @vel_x
 		@y -= @vel_y
@@ -58,12 +65,14 @@ class Player
 		@vel_y *= 0.95
 	end
 
+	# remove any fish and increase score if colliding with player mouth
 	def eat fishes
 		if fishes.reject! { |fish| @mouth_box.colliding?(fish.hit_box) }
 			@score += 1
 		end
 	end
 
+	# detect if feet are colliding with any platform
 	def standing? platforms
 		platforms.any? { |platform| @feet_box.colliding?(platform.hit_box, "stand") }
 	end
