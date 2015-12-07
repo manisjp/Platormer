@@ -58,12 +58,12 @@ class Player
 	end
 
 	def eat fishes
-		if fishes.reject! { |fish| @mouth_box.colliding?(fish.hit_box, 50) }
+		if fishes.reject! { |fish| @mouth_box.colliding?(fish.hit_box) }
 			@score += 1
 		end
 	end
 
 	def standing? platforms
-		platforms.any? { |platform| @feet_box.colliding?(platform.hit_box, 50) }
+		platforms.any? { |platform| @feet_box.colliding?(platform.hit_box, "stand") }
 	end
 end

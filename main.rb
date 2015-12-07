@@ -19,7 +19,7 @@ class GameWindow < Gosu::Window
 		@player.warp(width/2.0, height - 50)
 
 		@platforms = []
-		@platforms.push(Platform.new(0, 950, 1.25, 0.25))
+		@platforms.push(Platform.new(width/2 - 125, 950))
 		@fish = []
 	end
 
@@ -33,7 +33,7 @@ class GameWindow < Gosu::Window
 
 		@player.eat(@fish)
 
-		@player.jump
+		@player.jump if Gosu::button_down? Gosu::KbUp
 		@player.left if Gosu::button_down? Gosu::KbLeft
 		@player.right if Gosu::button_down? Gosu::KbRight
 
