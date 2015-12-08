@@ -1,4 +1,3 @@
-# describes what order to draw the elements
 class ZOrder
 	BACKGROUND = 0
 	PLATFORMS = 1
