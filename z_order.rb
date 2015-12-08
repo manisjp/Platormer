@@ -5,4 +5,5 @@ class ZOrder
 	PLAYER = 2
 	FISH = 3
 	UI = 4
+	END_GAME = 5
 end

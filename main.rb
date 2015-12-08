@@ -63,7 +63,9 @@ class GameWindow < Gosu::Window
 		@background_image.draw(0,0,ZOrder::BACKGROUND)
 		# draw the score or game over in bottom right
 		if game_over?
-			@font.draw("GAME OVER", self.width/2, self.height/2, ZOrder::UI, 1.0, 1.0, 0xff_000000)
+			Gosu::draw_rect(0, 0, 640, 1000, 0xff_000000, ZOrder::UI)
+			@font.draw("Score: #{@player.score}", self.width/2 - 100, self.height/3 + 150, ZOrder::UI, 1.0, 1.0, 0xff_ffffff)
+			@font.draw("GAME OVER", 50, self.height/3, ZOrder::UI, 2.0, 2.0, 0xff_ffffff)
 		else
 			@font.draw(@player.score, self.width-75, self.height-75, ZOrder::UI, 1.0, 1.0, 0xff_000000)
 		end
