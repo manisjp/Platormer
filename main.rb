@@ -49,8 +49,8 @@ class GameWindow < Gosu::Window
 		# player jumps when on platform no matter what
 		@player.jump if @player.standing?(@platforms)
 		# user input using arrow keys
-		@player.left if Gosu::button_down? Gosu::KbLeft
-		@player.right if Gosu::button_down? Gosu::KbRight
+		@player.left if Gosu::button_down?(Gosu::KbLeft)
+		@player.right if Gosu::button_down?(Gosu::KbRight)
 
 		# allow player to move
 		@player.move
@@ -87,7 +87,13 @@ class GameWindow < Gosu::Window
 	def gravity
 		@player.standing?(@platforms) ? @player.vel_y = 0 : @player.vel_y -= GRAVITY
 	end
-	
+
+	# handles the scrolling of the platforms and the fish
+	def scroll
+		
+	end
+
+	# used to display the end screen and end game
 	def game_over?
 		true if @player.y > 990
 	end
