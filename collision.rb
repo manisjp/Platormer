@@ -11,7 +11,7 @@ class Collision
 
 	def colliding? object, type = ""
 		if type.eql?("stand")
-			Gosu::distance(@x, @y, object.x, @y) < 100 &&
+			Gosu::distance(@x, @y, object.x, @y) < 125 &&
 			Gosu::distance(@x, @y, @x, object.y) < 5 ? true : false
 		else
 			Gosu::distance(@x, @y, object.x, object.y) < 50 ? true : false

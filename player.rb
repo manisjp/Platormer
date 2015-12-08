@@ -8,7 +8,7 @@ class Player
 	ACCELERATION = 1
 	TURN_ANGLE = 5
 
-	attr_accessor :vel_y, :score
+	attr_accessor :y, :vel_y, :score
 
 	# create player
 	def initialize

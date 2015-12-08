@@ -25,15 +25,16 @@ class GameWindow < Gosu::Window
 		# create empty arrays for the fishes and platforms
 		@platforms = []
 		@fishes = []
-		 
+
 		# create the starting platform
 		@platforms.push(Platform.new(width/2 - 125, 950))
 	end
 
 	def update
 		# create platforms and push into an array
-		if @platforms.size < 5
-			@platforms.push(Platform.new)
+		
+		(1..5).each do |i|
+			@platforms.push(Platform.new(rand*475, i*200)) if @platforms.length < 5
 		end
 		# create fish and push into an array
 		if @fishes.size < 10
@@ -53,6 +54,9 @@ class GameWindow < Gosu::Window
 		@player.move
 		# accelerate player down if not standing
 		gravity
+
+		# death condition
+		game_over if @player.y > 1000
 	end
 
 	def draw
@@ -77,6 +81,10 @@ class GameWindow < Gosu::Window
 	# if standing downwards acceleration stops
 	def gravity
 		@player.standing?(@platforms) ? @player.vel_y = 0 : @player.vel_y -= GRAVITY
+	end
+	
+	def game_over
+		
 	end
 
 end

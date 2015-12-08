@@ -7,13 +7,12 @@ class Platform
 	attr_accessor :hit_box
 
 	# create platform with a random position
-	# TODO: insure platforms are within jumping distance of at least one other
-	def initialize x = rand*640, y = rand*850
+	def initialize x, y
 		@image = Gosu::Image.new("media/platform.bmp")
 		
 		# scale image
 		@scale_x, @scale_y = 0.5, 0.25
-		
+
 		@x, @y = x, y
 
 		# create a hitbox 
