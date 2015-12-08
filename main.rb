@@ -31,8 +31,10 @@ class GameWindow < Gosu::Window
 	end
 
 	def update
+		# death condition
+		return if game_over?
+
 		# create platforms and push into an array
-		
 		(1..5).each do |i|
 			@platforms.push(Platform.new(rand*475, i*200)) if @platforms.length < 5
 		end
@@ -54,16 +56,17 @@ class GameWindow < Gosu::Window
 		@player.move
 		# accelerate player down if not standing
 		gravity
-
-		# death condition
-		game_over if @player.y > 1000
 	end
 
 	def draw
 		# draw background
 		@background_image.draw(0,0,ZOrder::BACKGROUND)
-		# draw the score in bottom right
-		@font.draw(@player.score, self.width-75, self.height-75, ZOrder::UI, 1.0, 1.0, 0xff_000000)
+		# draw the score or game over in bottom right
+		if game_over?
+			@font.draw("GAME OVER", self.width/2, self.height/2, ZOrder::UI, 1.0, 1.0, 0xff_000000)
+		else
+			@font.draw(@player.score, self.width-75, self.height-75, ZOrder::UI, 1.0, 1.0, 0xff_000000)
+		end
 
 		# draw player at current position
 		@player.draw
@@ -83,8 +86,8 @@ class GameWindow < Gosu::Window
 		@player.standing?(@platforms) ? @player.vel_y = 0 : @player.vel_y -= GRAVITY
 	end
 	
-	def game_over
-		
+	def game_over?
+		true if @player.y > 990
 	end
 
 end
