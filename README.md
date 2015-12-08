@@ -19,6 +19,6 @@ Now to **run** the code:
 ```sh
     $ ruby main.rb
 ```
-> There are only two controls to the game. The left and right arrow keys will move the player left and right respectively.
-> Collect as many fish as possible. The fish can only be collected through the penguins mouth.
-> If the player falls too low, the game will end.
+> - There are only two controls to the game. The left and right arrow keys will move the player left and right respectively.
+> - Collect as many fish as possible. The fish can only be collected through the penguins mouth.
+> - If the player falls too low, the game will end.
