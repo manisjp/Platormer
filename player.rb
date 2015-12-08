@@ -74,6 +74,6 @@ class Player
 
 	# detect if feet are colliding with any platform
 	def standing? platforms
-		platforms.any? { |platform| @feet_box.colliding?(platform.hit_box, "stand") }
+		platforms.any? { |platform| @feet_box.colliding?(platform.hit_box, "stand") && @vel_y < 0 }
 	end
 end

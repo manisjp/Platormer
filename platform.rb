@@ -4,7 +4,7 @@ require_relative "collision"
 
 class Platform
 
-	attr_accessor :hit_box
+	attr_accessor :y, :hit_box
 
 	# create platform with a random position
 	def initialize x, y

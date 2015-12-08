@@ -34,14 +34,14 @@ class GameWindow < Gosu::Window
 		# death condition
 		return if game_over?
 
-		# create platforms and push into an array
-		(1..5).each do |i|
-			@platforms.push(Platform.new(rand*475, i*200)) if @platforms.length < 5
+		# create platforms and fish and push them into arrays
+		(1...1000).each do |i|
+			@platforms.push(Platform.new(rand*475, i*200 + 100)) if @platforms.length < 5
 		end
-		# create fish and push into an array
-		if @fishes.size < 10
-			@fishes.push(Fish.new)
-		end
+		@fishes.push(Fish.new) if @fishes.size < 10
+
+		@platforms.reject! { |platform| platform.y > 1000}
+		@fishes.reject! { |fish| fish.y > 1000}
 
 		# allow player to collect fish and count score
 		@player.eat(@fishes)
@@ -56,6 +56,7 @@ class GameWindow < Gosu::Window
 		@player.move
 		# accelerate player down if not standing
 		gravity
+		scroll if @player.y < 500
 	end
 
 	def draw
@@ -90,7 +91,14 @@ class GameWindow < Gosu::Window
 
 	# handles the scrolling of the platforms and the fish
 	def scroll
-		
+		@platforms.each do |platform|
+			platform.y += @player.vel_y if @player.vel_y > 0
+			platform.hit_box.y += @player.vel_y if @player.vel_y > 0
+		end
+		@fishes.each do |fish|
+			fish.y += @player.vel_y if @player.vel_y > 0
+			fish.hit_box.y += @player.vel_y if @player.vel_y > 0
+		end
 	end
 
 	# used to display the end screen and end game

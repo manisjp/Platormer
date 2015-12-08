@@ -4,7 +4,7 @@ require_relative "collision"
 
 class Fish
 
-	attr_accessor :hit_box
+	attr_accessor :y, :hit_box
 
 	# create fully randomized fish
 	def initialize
