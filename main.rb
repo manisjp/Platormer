@@ -22,7 +22,7 @@ class GameWindow < Gosu::Window
 		@fishes = []
 
 		create_start_platform
-		@player.warp(width/2.0, height - 50)
+		@player.warp(width/2, height - 50)
 	end
 
 	def update
@@ -55,15 +55,26 @@ class GameWindow < Gosu::Window
 	# detects keyboard button presses
 	def button_down id
 		close if id == Gosu::KbEscape
+		restart if id == Gosu::KbSpace && game_over?
 	end
 
 	private
+		def restart
+			@fishes = []
+			@platforms = []
+			create_start_platform
+			@player.warp(width/2, height - 50)
+			@player.score = 0
+			update
+		end
+
 		def gravity
 			@player.standing?(@platforms) ? @player.vel_y = 0 : @player.vel_y -= GRAVITY
 		end
 
 		def game_over?
 			true if @player.y > height - 10
+			false if restart
 		end	
 		def game_play_screen
 			@background_image.draw(0,0,ZOrder::BACKGROUND)
