@@ -60,12 +60,15 @@ class GameWindow < Gosu::Window
 
 	private
 		def restart
-			@fishes = []
+			@background_image = Gosu::Image.new("media/background.jpg")
+			@font = Gosu::Font.new(50)
+
+			@player = Player.new
 			@platforms = []
+			@fishes = []
+
 			create_start_platform
 			@player.warp(width/2, height - 50)
-			@player.score = 0
-			update
 		end
 
 		def gravity
@@ -74,7 +77,6 @@ class GameWindow < Gosu::Window
 
 		def game_over?
 			true if @player.y > height - 10
-			false if restart
 		end	
 		def game_play_screen
 			@background_image.draw(0,0,ZOrder::BACKGROUND)
