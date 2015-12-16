@@ -55,22 +55,11 @@ class GameWindow < Gosu::Window
 	# detects keyboard button presses
 	def button_down id
 		close if id == Gosu::KbEscape
-		restart if id == Gosu::KbSpace && game_over?
+		# restart game if dead
+		initialize if id == Gosu::KbSpace && game_over?
 	end
 
 	private
-		def restart
-			@background_image = Gosu::Image.new("media/background.jpg")
-			@font = Gosu::Font.new(50)
-
-			@player = Player.new
-			@platforms = []
-			@fishes = []
-
-			create_start_platform
-			@player.warp(width/2, height - 50)
-		end
-
 		def gravity
 			@player.standing?(@platforms) ? @player.vel_y = 0 : @player.vel_y -= GRAVITY
 		end

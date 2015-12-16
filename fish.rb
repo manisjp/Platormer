@@ -2,7 +2,7 @@ require "gosu"
 require_relative "z_order"
 require_relative "collision"
 
-class Fish
+class Fish 
 
 	attr_accessor :y, :hit_box
 
