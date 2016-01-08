@@ -23,6 +23,7 @@ class GameWindow < Gosu::Window
 
 		create_start_platform
 		@player.warp(width/2, height - 50)
+		puts "0"
 	end
 
 	def update
@@ -103,5 +104,4 @@ class GameWindow < Gosu::Window
 			objects.reject! { |object| object.y > height}
 		end
 end
-window = GameWindow.new
-window.show
+GameWindow.new.show

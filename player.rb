@@ -39,8 +39,8 @@ class Player
 		normalize
 	end
 	def control_player
-			left if Gosu::button_down?(Gosu::KbLeft)
-			right if Gosu::button_down?(Gosu::KbRight)
+		left if Gosu::button_down?(Gosu::KbLeft)
+		right if Gosu::button_down?(Gosu::KbRight)
 	end
 	def jump
 		@vel_y += JUMP_POWER
